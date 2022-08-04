@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    volumes:
+      - ./data:/data
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    command: [--auth]
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
