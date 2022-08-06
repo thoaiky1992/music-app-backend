@@ -7,6 +7,7 @@ services:
     restart: always
     volumes:
       - ./data:/data
+      - ./backup:/home
     expose:
       - 27017
     ports:

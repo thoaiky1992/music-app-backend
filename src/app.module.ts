@@ -8,6 +8,8 @@ import { PostModule } from './modules/post/post.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { GenreModule } from './modules/genre/genre.module';
+import { MusicModule } from './modules/music/music.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { join } from 'path';
     UserModule,
     PostModule,
     AuthModule,
+    GenreModule,
+    MusicModule,
   ],
   controllers: [AppController],
   providers: [AppService],
