@@ -46,7 +46,7 @@ export class AuthService {
 
     if (!user) {
       throw new UnauthorizedException(
-        'Incorrect email or password, please try again',
+        'Email hoặc mật khẩu không chính xác. Xin vui lòng thử lại !',
       );
     }
 
