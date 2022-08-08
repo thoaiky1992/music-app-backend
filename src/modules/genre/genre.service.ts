@@ -10,26 +10,18 @@ export class GenreService extends BaseService<GenreDocument> {
   constructor(
     @InjectModel(Genre.name) private genreModel: Model<GenreDocument>,
   ) {
-    super();
+    super(genreModel);
   }
   async createOne(createPostDto: CreateGenreDto): Promise<Genre> {
     const createdCat = new this.genreModel(createPostDto);
     return createdCat.save();
   }
 
-  async getOne(id: string, body): Promise<Genre> {
-    return this.findByIdWithOptions(this.genreModel, id, body);
+  async getOne(id: string, options: any = {}): Promise<Genre> {
+    return this.findByIdWithOptions(id, options);
   }
 
-  async getMany(body = undefined): Promise<{ rows: Genre[]; count: number }> {
-    return await this.findWithOptions(this.genreModel, body);
-  }
-
-  async updateOne(id: string, body) {
-    return await this.findByIdAndUpdate(this.genreModel, id, body);
-  }
-
-  async deleteOne(id: string) {
-    return await this.findByIdAndDelete(this.genreModel, id);
+  async getMany(options: any = {}): Promise<{ rows: Genre[]; count: number }> {
+    return await this.findWithOptions(options);
   }
 }

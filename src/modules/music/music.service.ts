@@ -10,26 +10,18 @@ export class MusicService extends BaseService<MusicDocument> {
   constructor(
     @InjectModel(Music.name) private musicModel: Model<MusicDocument>,
   ) {
-    super();
+    super(musicModel);
   }
   async createOne(createPostDto: CreateMusicDto): Promise<Music> {
     const createdCat = new this.musicModel(createPostDto);
     return createdCat.save();
   }
 
-  async getOne(id: string, body): Promise<Music> {
-    return this.findByIdWithOptions(this.musicModel, id, body);
+  async getOne(id: string, options: any = {}): Promise<Music> {
+    return this.findByIdWithOptions(id, options);
   }
 
-  async getMany(body = undefined): Promise<{ rows: Music[]; count: number }> {
-    return await this.findWithOptions(this.musicModel, body);
-  }
-
-  async updateOne(id: string, body) {
-    return await this.findByIdAndUpdate(this.musicModel, id, body);
-  }
-
-  async deleteOne(id: string) {
-    return await this.findByIdAndDelete(this.musicModel, id);
+  async getMany(options: any = {}): Promise<{ rows: Music[]; count: number }> {
+    return await this.findWithOptions(options);
   }
 }

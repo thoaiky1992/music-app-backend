@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 import * as bcryptjs from 'bcryptjs';
 import { HASH_SALT } from '@src/constants';
-import { Post } from '../post/post.schema';
 
 export type UserDocument = User & Document;
 

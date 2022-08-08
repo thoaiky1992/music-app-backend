@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './modules/user/user.module';
-import { PostModule } from './modules/post/post.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -28,7 +27,6 @@ import { MusicModule } from './modules/music/music.module';
       inject: [ConfigService],
     }),
     UserModule,
-    PostModule,
     AuthModule,
     GenreModule,
     MusicModule,

@@ -32,3 +32,5 @@ export class Music {
 }
 
 export const MusicSchema = SchemaFactory.createForClass(Music);
+
+MusicSchema.index({ name: 'text', title: 'text' });
