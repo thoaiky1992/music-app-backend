@@ -28,7 +28,7 @@ export class Music {
   likes: number;
 
   @Prop({ type: Types.ObjectId, ref: Genre.name })
-  genre;
+  genre: Types.ObjectId;
 }
 
 export const MusicSchema = SchemaFactory.createForClass(Music);

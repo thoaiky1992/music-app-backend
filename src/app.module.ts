@@ -9,6 +9,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { GenreModule } from './modules/genre/genre.module';
 import { MusicModule } from './modules/music/music.module';
+import { LikeModule } from './modules/like/like.module';
+import { MyLibraryModule } from './modules/my-library/my-library.module';
+import { AppGateWay } from '@src/gateway/gateway';
 
 @Module({
   imports: [
@@ -30,8 +33,10 @@ import { MusicModule } from './modules/music/music.module';
     AuthModule,
     GenreModule,
     MusicModule,
+    LikeModule,
+    MyLibraryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppGateWay],
 })
 export class AppModule {}

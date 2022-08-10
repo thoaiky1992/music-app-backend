@@ -13,8 +13,8 @@ export class GenreService extends BaseService<GenreDocument> {
     super(genreModel);
   }
   async createOne(createPostDto: CreateGenreDto): Promise<Genre> {
-    const createdCat = new this.genreModel(createPostDto);
-    return createdCat.save();
+    const createdMusic = new this.genreModel(createPostDto);
+    return createdMusic.save();
   }
 
   async getOne(id: string, options: any = {}): Promise<Genre> {
