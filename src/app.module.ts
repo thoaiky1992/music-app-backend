@@ -12,6 +12,7 @@ import { MusicModule } from './modules/music/music.module';
 import { LikeModule } from './modules/like/like.module';
 import { MyLibraryModule } from './modules/my-library/my-library.module';
 import { AppGateWay } from '@src/gateway/gateway';
+import { RedisCliModule } from './modules/redis/redis.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { AppGateWay } from '@src/gateway/gateway';
     MusicModule,
     LikeModule,
     MyLibraryModule,
+    RedisCliModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppGateWay],

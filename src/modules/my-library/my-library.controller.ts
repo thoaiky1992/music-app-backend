@@ -16,11 +16,11 @@ export default class MyLibraryController {
 
   @Get()
   async getMany(@Query('options') options) {
-    return this.myLibraryService.getMany(JSON.parse(options));
+    return this.myLibraryService.getMany(JSON.parse(options || '{}'));
   }
 
   @Post('delete-this-song')
   async removeThisSong(@Body() options) {
-    return this.myLibraryService.removeThisSong(options);
+    return this.myLibraryService.removeThisSong(options || {});
   }
 }

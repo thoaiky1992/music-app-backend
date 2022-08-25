@@ -14,11 +14,11 @@ export default class MusicController {
 
   @Get()
   async getMany(@Query('options') options) {
-    return this.musicService.getMany(JSON.parse(options));
+    return this.musicService.getMany(JSON.parse(options || '{}'));
   }
 
   @Get(':id')
   async getOne(@Param('id') id: string, @Query('options') options) {
-    return this.musicService.getOne(id, JSON.parse(options));
+    return this.musicService.getOne(id, JSON.parse(options || '{}'));
   }
 }

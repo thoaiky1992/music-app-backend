@@ -14,11 +14,11 @@ export default class GenreController {
 
   @Get()
   async getMany(@Query('options') options) {
-    return this.genreService.getMany(JSON.parse(options));
+    return this.genreService.getMany(JSON.parse(options || '{}'));
   }
 
   @Get(':id')
   async getOne(@Param('id') id: string, @Query('options') options) {
-    return this.genreService.getOne(id, JSON.parse(options));
+    return this.genreService.getOne(id, JSON.parse(options || '{}'));
   }
 }

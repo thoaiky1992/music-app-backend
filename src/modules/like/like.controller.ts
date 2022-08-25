@@ -16,11 +16,11 @@ export default class LikeController {
 
   @Get()
   async getMany(@Query('options') options) {
-    return this.likeService.getMany(JSON.parse(options));
+    return this.likeService.getMany(JSON.parse(options || '{}'));
   }
 
   @Post('delete')
   async deleteOne(@Body() options) {
-    return this.likeService.deleteOneByOptions(options);
+    return this.likeService.deleteOneByOptions(options || {});
   }
 }
