@@ -17,14 +17,14 @@ export class AppGateWay implements OnGatewayConnection, OnGatewayInit {
   }
 
   async handleConnection(client: Socket) {
-    // const { token } = client.handshake.auth;
-    // if (token) {
-    //   this.server.emit('socket', { title: 'Hello world' });
-    //   const payload = await this.jwtService.verify(token);
-    //   if (!payload) return false;
-    // } else {
-    //   return false;
-    // }
+    const { token } = client.handshake.auth;
+    if (token) {
+      this.server.emit('socket', { title: 'Hello world' });
+      const payload = await this.jwtService.verify(token);
+      if (!payload) return false;
+    } else {
+      return false;
+    }
   }
 }
 
