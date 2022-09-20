@@ -134,6 +134,7 @@ export class AuthService {
     if (payload.newPassword.length) {
       data['password'] = bcryptjs.hash(payload.newPassword, HASH_SALT);
     }
+
     const updateUser = await this.userModel.findOneAndUpdate(
       {
         email: data.email,
