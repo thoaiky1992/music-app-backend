@@ -18,6 +18,7 @@ import { RedisCliModule } from './modules/redis/redis.module';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
+      exclude: ['/api*'],
     }),
 
     ConfigModule.forRoot(),

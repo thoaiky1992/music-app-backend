@@ -12,6 +12,9 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { LoginUserDto } from '../user/dto/login-user.dto';
+import { join } from 'path';
+import * as fs from 'fs';
+import * as bcryptjs from 'bcryptjs';
 import { HASH_SALT } from '@src/constants';
 
 @Injectable()
@@ -105,5 +108,44 @@ export class AuthService {
 
   async comparePassword(enteredPassword, dbPassword) {
     return await bcrypt.compare(enteredPassword, dbPassword);
+  }
+
+  async updateUser(payload: any, file: Express.Multer.File) {
+    const data = {
+      name: payload.name,
+      email: payload.email,
+    };
+
+    if (file) {
+      const uploadPath = '/images/user';
+      console.log(join(__dirname, '..', '..', '..', 'public', uploadPath));
+
+      const disk = {
+        fullpath: join(...[__dirname, '..', '..', '..', 'public', uploadPath]),
+        publicPath: join(...[uploadPath]),
+      };
+      if (!fs.existsSync(disk.fullpath)) {
+        fs.mkdirSync(disk.fullpath, { recursive: true });
+      }
+      const filename = `${Date.now()}-${file.originalname}`;
+      fs.writeFileSync(join(disk.fullpath, String(filename)), file.buffer);
+      data['image'] = `${disk.publicPath}/${filename}`;
+    }
+    if (payload.newPassword.length) {
+      data['password'] = bcryptjs.hash(payload.newPassword, HASH_SALT);
+    }
+    const updateUser = await this.userModel.findOneAndUpdate(
+      {
+        email: data.email,
+      },
+      { ...data },
+      { new: true },
+    );
+
+    // generate access_token
+    const access_token = await this.generateToken(updateUser.toJSON());
+
+    // return the user and the token
+    return { access_token };
   }
 }

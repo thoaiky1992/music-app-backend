@@ -1,9 +1,20 @@
-import { Controller, Body, Post, Res, Get, Req } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Post,
+  Res,
+  Get,
+  Req,
+  UseGuards,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 import { LoginUserDto } from '../user/dto/login-user.dto';
 import { CreateUserDto } from '../user/dto/create-user.dto';
-
+import { FileInterceptor } from '@nestjs/platform-express';
+import { JwtAuthGuard } from '@src/modules/auth/jwt.guard';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -21,5 +32,15 @@ export class AuthController {
   @Get('/me')
   getCurrentUser(@Req() request: Request) {
     return this.authService.getCurrentUser(request);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  @Post('/update-user')
+  async updateUser(
+    @Body() payload: any,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.authService.updateUser(payload, file);
   }
 }
