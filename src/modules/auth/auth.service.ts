@@ -92,7 +92,7 @@ export class AuthService {
 
   async getCurrentUser(request: Request) {
     const token = request.headers['authorization'].split(' ')[1];
-    const payload = await this.jwtService.verify(token);
+    const payload = await this.jwtService.decode(token);
     return payload;
   }
 
